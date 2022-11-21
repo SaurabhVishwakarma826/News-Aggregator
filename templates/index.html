@@ -54,6 +54,26 @@
           </form>
         </div>
       </nav>
+      <div class="jumbotron">
+        <h1>DataFlair News Aggregator</h1>
+        <form method="POST" action="{% url 'scrap' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success">Get my morning news</button>
+        </form>
+      </div>
+      <div class="card-columns" style="padding: 10px; margin: 20px;">
+      {% for object in home_list%}
+      <div class="card" style="width: 18rem;border:5px black solid;">
+      <img class="card-img-top" src = "{{ object.home_image }}">
+      <div class="card-body">
+        <h5 class="card-title"><div class="card-body">
+          <a href="{{object.home_url}}"><h5 class="card-title">{{object.home_title}}</h5></a>
+        </div></h5>
+      </div>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
