@@ -23,16 +23,16 @@
               <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/localnews">Local News</a>
+              <a class="nav-link" href="/politics">Politics</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/currentnews">Current News</a>
+                <a class="nav-link" href="/world">World</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="sport">Sports</a>
+                <a class="nav-link" href="/sport">Sports</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="businessnews">Business News</a>
+                <a class="nav-link" href="/businessnews">Business News</a>
               </li>
             
               <li class="nav-item dropdown">
@@ -54,6 +54,28 @@
           </form>
         </div>
       </nav>
+
+
+      <div class="jumbotron">
+        <h1>DataFlair News Aggregator</h1>
+        <form method="POST" action="{% url 'scrapbusiness' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success">Get my morning news</button>
+        </form>
+      </div>
+      <div class="card-columns" style="padding: 10px; margin: 20px;">
+      {% for object in business_list%}
+      <div class="card" style="width: 18rem;border:5px black solid;">
+      <img class="card-img-top" src = "{{ object.business_image }}">
+      <div class="card-body">
+        <h5 class="card-title"><div class="card-body">
+          <a href="{{object.business_url}}"><h5 class="card-title">{{object.business_title}}</h5></a>
+        </div></h5>
+      </div>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
