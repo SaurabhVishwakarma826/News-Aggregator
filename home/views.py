@@ -3,6 +3,7 @@ import requests
 from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup as BSoup
 from home.models import HomeNews, SportsNews, BusinessNews, WorldNews, PoliticsNews
+from newsModelCode.predict import Model
 
 
 def index(request):
@@ -54,10 +55,12 @@ def scrap(request):
 		image_src = artcile.find("div",{"class":"jsx-3621759782 blog_img"}).find('img')['data-src']
 		title = artcile.h4.text
 		new_home = HomeNews()
-		new_home.home_title = title
-		new_home.home_url = link
-		new_home.home_image = image_src
-		new_home.save()
+		model = Model(title)
+		if model.predict()[0] == 1:
+			new_home.home_title = title
+			new_home.home_url = link
+			new_home.home_image = image_src
+			new_home.save()
 	return redirect("../")
 
 
@@ -75,10 +78,12 @@ def sportnews(request):
 		image_src = artcile.find('div',{"class":"news_right"}).find('img')['src']
 		title = artcile.find('div',{"class":"news_left"}).find('div',{"class":"news_title"}).text
 		new_sport = SportsNews()
-		new_sport.sports_title = title
-		new_sport.sports_url = link
-		new_sport.sports_image = image_src
-		new_sport.save()
+		model = Model(title)
+		if model.predict()[0] == 1:
+			new_sport.sports_title = title
+			new_sport.sports_url = link
+			new_sport.sports_image = image_src
+			new_sport.save()
 	return redirect("../")
 
 def scrapbusiness(request):
@@ -96,10 +101,12 @@ def scrapbusiness(request):
 		image_src = artcile.find('div',{"class":"col-lg-3 col-12 pl-0"}).find('img')['src']
 		title = artcile.find('div',{"class":"col-md-9 pl-4"}).find('div',{"class":"news_description desc-title morenews-title"}).text
 		new_business = BusinessNews()
-		new_business.business_title = title
-		new_business.business_image = image_src
-		new_business.business_url = link
-		new_business.save()
+		model = Model(title)
+		if model.predict()[0] == 1:
+			new_business.business_title = title
+			new_business.business_image = image_src
+			new_business.business_url = link
+			new_business.save()
 	return redirect("../")
 
 def scrapworld(request):
@@ -115,11 +122,12 @@ def scrapworld(request):
 		image_src = artcile.find("div",{"class":"jsx-3621759782 blog_img"}).find('img')['data-src']
 		title = artcile.h4.text
 		new_world = WorldNews()
-		
-		new_world.world_title = title
-		new_world.world_image = image_src
-		new_world.world_url = link
-		new_world.save()
+		model = Model(title)
+		if model.predict()[0] == 1:
+			new_world.world_title = title
+			new_world.world_image = image_src
+			new_world.world_url = link
+			new_world.save()
 	return redirect("../")
 
 def scrappolitics(request):
@@ -135,8 +143,10 @@ def scrappolitics(request):
 		image_src = artcile.find("div",{"class":"jsx-3621759782 blog_img"}).find('img')['data-src']
 		title = artcile.h4.text
 		new_politics = PoliticsNews()
-		new_politics.politics_title = title
-		new_politics.politics_image = image_src
-		new_politics.politics_url = link
-		new_politics.save()
+		model = Model(title)
+		if model.predict()[0] == 1:
+			new_politics.politics_title = title
+			new_politics.politics_image = image_src
+			new_politics.politics_url = link
+			new_politics.save()
 	return redirect("../")
