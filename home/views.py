@@ -1,152 +1,71 @@
-from django.shortcuts import render, HttpResponse
-import requests
-from django.shortcuts import render, redirect
-from bs4 import BeautifulSoup as BSoup
-from home.models import HomeNews, SportsNews, BusinessNews, WorldNews, PoliticsNews
-from newsModelCode.predict import Model
 
+from django.shortcuts import render, redirect
+# from bs4 import BeautifulSoup as BSoup
+from home.models import HomeNews, SportsNews, BusinessNews, WorldNews, PoliticsNews
+# from newsModelCode.predict import Model
+import scraping
 
 def index(request):
-    home_headline = HomeNews.objects.all()[::-1]
-    context = {
-        'home_list':home_headline
-    }
-    return render(request, 'index.html',context)
+	scraping.home()
+	home_headline = HomeNews.objects.all().order_by('?')[:6]
+	politics_headline = PoliticsNews.objects.all().order_by('?')[:4]
+	world_headline = WorldNews.objects.all().order_by('?')[:4]
+	sport_headline = SportsNews.objects.all().order_by('?')[:4]
+	business_headline = BusinessNews.objects.all().order_by('?')[:4]
+
+	home_2 = HomeNews.objects.all().order_by('?')[6:8]       # popular news
+	home_3 = HomeNews.objects.all().order_by('?')[8:10]      # populer news
+	home_4 = HomeNews.objects.all().order_by('?')[10:15]     # latest news
+	home_5 = WorldNews.objects.all().order_by('?')[4:9]      # latest news
+	home_6 = HomeNews.objects.all().order_by('?')[4:10]      # trending news
+
+	context = {
+		'home_list':home_headline,
+		'politics_list': politics_headline,
+		'world_list' : world_headline,
+		'business_list' : business_headline,
+		'sport_list' : sport_headline,
+		'home_2': home_2,
+		'home_3': home_3,
+		'home_4': home_4,
+		'home_5': home_5,
+		'home_6': home_6,
+	}
+	return render(request, 'index.html',context)
 
 def politics(request):
-	politics_headline = PoliticsNews.objects.all()[::-1]
+	scraping.politics()
+	politics_headline = PoliticsNews.objects.all().order_by('?')[::-1]
 	context = {
 		'politics_list' : politics_headline
-	}
+		}
 	return render(request, 'politics.html', context)
 
 def world(request):
-	world_headline = WorldNews.objects.all()[::-1]
+	scraping.world()
+	world_headline = WorldNews.objects.all().order_by('?')[::-1]
 	context = {
 		'world_list':world_headline
-	}
+		}
 	return render(request, 'world.html',context)
 
-def sport(request):
-    sport_headline = SportsNews.objects.all()[::-1]
-    context = {
-        'sport_list':sport_headline
-    }
-    return render(request, 'sport.html',context)
+
+def sports(request):
+	scraping.sport()
+	sport_headline = SportsNews.objects.all().order_by('?')[::-1]
+	context = {
+		'sport_list':sport_headline
+		}
+	return render(request, 'sports.html',context)
 
 def businessnews(request):
-	business_headline = BusinessNews.objects.all()[::-1]
+	scraping.business()
+	business_headline = BusinessNews.objects.all().order_by('?')[::-1]
 	context = {
 		'business_list' : business_headline
-	}
-	return render(request, 'businessnews.html', context)
+		}
+	return render(request, 'business.html', context)
 
+def contact(request):
+	return render(request, 'contact.html')
 
-def scrap(request):
-	HomeNews.objects.all().delete()
-	session = requests.Session()
-	session.headers = {"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"}
-	url = "https://www.news18.com/india/"
-	content = session.get(url, verify=False).content
-	soup = BSoup(content, "html.parser")
-	News = soup.find_all('div', {"class":"jsx-3621759782 blog_list_row"})
-	for artcile in News:
-		link = artcile.find('a')['href']
-		image_src = artcile.find("div",{"class":"jsx-3621759782 blog_img"}).find('img')['data-src']
-		title = artcile.h4.text
-		new_home = HomeNews()
-		model = Model(title)
-		if model.predict()[0] == 1:
-			new_home.home_title = title
-			new_home.home_url = link
-			new_home.home_image = image_src
-			new_home.save()
-	return redirect("../")
-
-
-def sportnews(request):
-	SportsNews.objects.all().delete()
-	session = requests.Session()
-	session.headers = {"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"}
-	url = "https://zeenews.india.com/cricket/t20-world-cup"
-	content = session.get(url, verify=False).content
-	soup = BSoup(content, "html.parser")
-	News = soup.find_all('div', {"class":"news_item"})
-	for artcile in News:
-		link = artcile.find('div',{"class":"news_left"}).find('div',{"class":"news_title"}).find('a')['href']
-		link = 'https://zeenews.india.com'+link
-		image_src = artcile.find('div',{"class":"news_right"}).find('img')['src']
-		title = artcile.find('div',{"class":"news_left"}).find('div',{"class":"news_title"}).text
-		new_sport = SportsNews()
-		model = Model(title)
-		if model.predict()[0] == 1:
-			new_sport.sports_title = title
-			new_sport.sports_url = link
-			new_sport.sports_image = image_src
-			new_sport.save()
-	return redirect("../")
-
-def scrapbusiness(request):
-	BusinessNews.objects.all().delete()
-	session = requests.Session()
-	session.headers = {"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"}
-	url = "https://zeenews.india.com/business"
-	content = session.get(url, verify=False).content
-	soup = BSoup(content, "html.parser")
-	news = soup.find('div',{"class":"more-news-section"})
-	News = news.find_all('div', {"class":"row no-gutters morenews-block"})
-	for artcile in News:
-		link = artcile.find('div',{"class":"col-lg-3 col-12 pl-0"}).find('a')['href']
-		link = 'https://zeenews.india.com'+link
-		image_src = artcile.find('div',{"class":"col-lg-3 col-12 pl-0"}).find('img')['src']
-		title = artcile.find('div',{"class":"col-md-9 pl-4"}).find('div',{"class":"news_description desc-title morenews-title"}).text
-		new_business = BusinessNews()
-		model = Model(title)
-		if model.predict()[0] == 1:
-			new_business.business_title = title
-			new_business.business_image = image_src
-			new_business.business_url = link
-			new_business.save()
-	return redirect("../")
-
-def scrapworld(request):
-	WorldNews.objects.all().delete()
-	session = requests.Session()
-	session.headers = {"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"}
-	url = "https://www.news18.com/world/"
-	content = session.get(url, verify=False).content
-	soup = BSoup(content, "html.parser")
-	News = soup.find_all('div', {"class":"jsx-3621759782 blog_list_row"})
-	for artcile in News:
-		link = artcile.find('a')['href']
-		image_src = artcile.find("div",{"class":"jsx-3621759782 blog_img"}).find('img')['data-src']
-		title = artcile.h4.text
-		new_world = WorldNews()
-		model = Model(title)
-		if model.predict()[0] == 1:
-			new_world.world_title = title
-			new_world.world_image = image_src
-			new_world.world_url = link
-			new_world.save()
-	return redirect("../")
-
-def scrappolitics(request):
-	PoliticsNews.objects.all().delete()
-	session = requests.Session()
-	session.headers = {"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"}
-	url = "https://www.news18.com/politics/"
-	content = session.get(url, verify=False).content
-	soup = BSoup(content, "html.parser")
-	News = soup.find_all('div', {"class":"jsx-3621759782 blog_list_row"})
-	for artcile in News:
-		link = artcile.find('a')['href']
-		image_src = artcile.find("div",{"class":"jsx-3621759782 blog_img"}).find('img')['data-src']
-		title = artcile.h4.text
-		new_politics = PoliticsNews()
-		model = Model(title)
-		if model.predict()[0] == 1:
-			new_politics.politics_title = title
-			new_politics.politics_image = image_src
-			new_politics.politics_url = link
-			new_politics.save()
-	return redirect("../")

@@ -1,87 +1,225 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NEWSAGGREGATOR</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Favicon -->
+    <link href="static/img/favicon.ico" rel="icon">
 
-    <title>CurrentNews</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">News</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/politics">Politics</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/world">World</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="sport">Sports</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="businessnews">Business News</a>
-              </li>
-            
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Services
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">   
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="static/css/stylee.css" rel="stylesheet">
+
+    
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+
+        <div class="row align-items-center py-2 px-lg-5">
+            <div class="col-lg-4">
+                <a href="" class="navbar-brand d-none d-lg-block">
+                    <h1 class="m-0 display-5 text-uppercase"><span class="text-primary">News</span>Aggregator</h1>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Detect Fake news</a>
-                  <a class="dropdown-item" href="#">Detect Spam SMS</a>
-                  <a class="dropdown-item" href="#">Detect Spam mails</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+            </div>
+            <!-- <div class="col-lg-8 text-center text-lg-right">
+                <img class="img-fluid" src="img/ads-700x70.jpg" alt="">
+            </div> -->
         </div>
-      </nav>
-
-
-      <div class="jumbotron">
-        <h1>DataFlair News Aggregator</h1>
-        <form method="POST" action="{% url 'scrapworld' %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-success">Get my morning news</button>
-        </form>
-      </div>
-      <div class="card-columns" style="padding: 10px; margin: 20px;">
-      {% for object in world_list%}
-      <div class="card" style="width: 18rem;border:5px black solid;">
-      <img class="card-img-top" src = "{{ object.world_image }}">
-      <div class="card-body">
-        <h5 class="card-title"><div class="card-body">
-          <a href="{{object.world_url}}"><h5 class="card-title">{{object.world_title}}</h5></a>
-        </div></h5>
-      </div>
-      </div>
-      {% endfor %}
     </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0 mb-3">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-2 py-lg-0 px-lg-5">
+            <a href="" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-uppercase"><span class="text-primary">News</span>Aggregator</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Categories</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/sports" class="dropdown-item">Sports</a>
+                            <a href="/politics" class="dropdown-item">Politics</a>
+                            <a href="/business" class="dropdown-item">Business</a>
+                            <a href="/world" class="dropdown-item">Global</a>
+
+                        </div>
+                    </div>
+                    
+                    <a href="services.html" class="nav-item nav-link">Support</a>
+                    <a href="/contact" class="nav-item nav-link">Contact</a>
+                </div>
+                <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
+                    <input type="text" class="form-control" placeholder="Keyword">
+                    <div class="input-group-append">
+                        <button class="input-group-text text-secondary"><i
+                                class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="container">
+            <nav class="breadcrumb bg-transparent m-0 p-0">
+                <a class="breadcrumb-item" href="/">Home</a>
+                <a class="breadcrumb-item" href="#">Category</a>
+                <span class="breadcrumb-item active">Global</span>
+            </nav>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- News With Sidebar Start -->
+
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                        <h3 class="m-0">Global</h3>
+                    </div>
+                </div>
+                        
+                <div class="whole-container">
+                  {%for object in world_list%}
+                    <div class="position-relative mb-3 box-container">
+                        <img class="img-fluid w-100" src="{{object.world_image}}" style="object-fit: cover;">
+                        <div class="overlay position-relative bg-light">
+
+                          <a class="h4 Featured_Slider" href="{{object.world_url}}" target="_blanck">{{object.world_title}}</a>
+
+                        </div>
+                    </div>
+                  {%endfor%}
+
+                </div>
+
+            </div>
+        </div>
     </div>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+    <!-- News With Sidebar End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="mb-2 mt-n2 display-5 text-uppercase"><span class="text-primary">News</span>Aggr.</h1>
+                </a>
+                <p>Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem lorem sit sed elitr sed kasd et</p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="font-weight-bold mb-4">Categories</h4>
+                <div class="d-flex flex-wrap m-n1">
+                    <a href="/politics" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
+                    <a href="/business" class="btn btn-sm btn-outline-secondary m-1">Business</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
+                    <a href="/sports" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Technology</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Entertainment</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Lifestyle</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="font-weight-bold mb-4">Tags</h4>
+                <div class="d-flex flex-wrap m-n1">
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Technology</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Entertainment</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Lifestyle</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="font-weight-bold mb-4">Quick Links</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>About</a>
+                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Advertise</a>
+                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Privacy & policy</a>
+                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Terms & conditions</a>
+                    <a class="text-secondary" href="/contact"><i class="fa fa-angle-right text-dark mr-2"></i>Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-4 px-sm-3 px-md-5">
+        <p class="m-0 text-center">
+            &copy; <a class="font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. 
+			
+			<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+			Designed by <a class="font-weight-bold" href="#">Aditya Nishad</a>
+        </p>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-dark back-to-top"><i class="fa fa-angle-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="static/lib/easing/easing.min.js"></script>
+    <script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="static/js/main.js"></script>
+</body>
+
 </html>

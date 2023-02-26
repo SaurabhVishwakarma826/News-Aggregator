@@ -91,7 +91,7 @@
             <nav class="breadcrumb bg-transparent m-0 p-0">
                 <a class="breadcrumb-item" href="/">Home</a>
                 <a class="breadcrumb-item" href="#">Category</a>
-                <span class="breadcrumb-item active">Politics</span>
+                <span class="breadcrumb-item active">Business</span>
             </nav>
         </div>
     </div>
@@ -105,17 +105,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                        <h3 class="m-0">Politics</h3>
+                        <h3 class="m-0">Business</h3>
                     </div>
                 </div>
                         
                 <div class="whole-container">
-                  {%for object in politics_list%}
+                  {%for object in business_list%}
                     <div class="position-relative mb-3 box-container">
-                        <img class="img-fluid w-100" src="{{object.politics_image}}" style="object-fit: cover;">
+                        <img class="img-fluid w-100" src="{{object.business_image}}" style="object-fit: cover;">
                         <div class="overlay position-relative bg-light">
 
-                          <a class="h4 Featured_Slider" href="{{object.politics_url}}" target="_blanck">{{object.politics_title}}</a>
+                          <a class="h4 Featured_Slider" href="{{object.business_url}}" target="_blanck">{{object.business_title}}</a>
 
                         </div>
                     </div>

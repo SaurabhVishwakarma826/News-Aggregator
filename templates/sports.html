@@ -91,7 +91,7 @@
             <nav class="breadcrumb bg-transparent m-0 p-0">
                 <a class="breadcrumb-item" href="/">Home</a>
                 <a class="breadcrumb-item" href="#">Category</a>
-                <span class="breadcrumb-item active">Politics</span>
+                <span class="breadcrumb-item active">Sports</span>
             </nav>
         </div>
     </div>
@@ -105,17 +105,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                        <h3 class="m-0">Politics</h3>
+                        <h3 class="m-0">Sports</h3>
                     </div>
                 </div>
                         
                 <div class="whole-container">
-                  {%for object in politics_list%}
+                  {%for object in sport_list%}
                     <div class="position-relative mb-3 box-container">
-                        <img class="img-fluid w-100" src="{{object.politics_image}}" style="object-fit: cover;">
+                        <img class="img-fluid w-100" src="{{object.sports_image}}" style="object-fit: cover;">
                         <div class="overlay position-relative bg-light">
 
-                          <a class="h4 Featured_Slider" href="{{object.politics_url}}" target="_blanck">{{object.politics_title}}</a>
+                          <a class="h4 Featured_Slider" href="{{object.sports_url}}" target="_blanck">{{object.sports_title}}</a>
 
                         </div>
                     </div>
@@ -150,10 +150,10 @@
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="font-weight-bold mb-4">Categories</h4>
                 <div class="d-flex flex-wrap m-n1">
-                    <a href="/politics" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                    <a href="/business" class="btn btn-sm btn-outline-secondary m-1">Business</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                    <a href="/sports" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
