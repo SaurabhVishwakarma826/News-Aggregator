@@ -2,7 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+import string
+from nltk.corpus import stopwords
 
 def main():
     """Run administrative tasks."""
@@ -17,6 +18,16 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+def process(text):
+        nopunc = [char for char in text if char not in string.punctuation]
+        nopunc = ''.join(nopunc)
+        clean = [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
+        return clean
 
 if __name__ == '__main__':
     main()
+    def process(text):
+        nopunc = [char for char in text if char not in string.punctuation]
+        nopunc = ''.join(nopunc)
+        clean = [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
+        return clean

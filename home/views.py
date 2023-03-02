@@ -1,9 +1,13 @@
-
 from django.shortcuts import render, redirect
-# from bs4 import BeautifulSoup as BSoup
 from home.models import HomeNews, SportsNews, BusinessNews, WorldNews, PoliticsNews
-# from newsModelCode.predict import Model
 import scraping
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from joblib import dump, load
+import joblib
+from manage import process
+from newsModelCode.predict import Model
+
 
 def index(request):
 	scraping.home()
@@ -69,3 +73,54 @@ def businessnews(request):
 def contact(request):
 	return render(request, 'contact.html')
 
+
+def fackSMS(request):
+    df = pd.read_csv("./SMS_model/spam.csv", encoding="latin-1")
+    df.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis=1, inplace=True)
+    # Features and Labels
+    df['label'] = df['v1'].map({'ham': 0, 'spam': 1})
+    X = df['v2']
+    y = df['label']
+
+    # Extract Feature With CountVectorizer
+    cv = CountVectorizer()
+    X = cv.fit_transform(X)  # Fit the Data
+    from sklearn.model_selection import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+    from sklearn.naive_bayes import MultinomialNB
+
+    clf = MultinomialNB()
+    clf.fit(X_train, y_train)
+    clf.score(X_test, y_test)
+
+    is_fake = None
+    if request.method == 'POST':
+        # Get the user input from the form
+        message = request.POST['user_input']
+        data = [message]
+        vect = cv.transform(data).toarray()
+        # Use the ML model to predict whether the input is fake or not
+        is_fake = clf.predict(vect)
+        print(is_fake)
+        is_fake=is_fake[0]
+    return render(request, 'sms.html', {'fack':is_fake})
+
+
+def fackMail(request):
+	model = joblib.load('./Mails_model/spam_classifier.joblib')
+	is_fake = None
+	if request.method == 'POST':
+		message = request.POST['user_input']
+		message = [message]
+		is_fake = model.predict(message)[0]
+		print(is_fake)
+	return render(request, 'mails.html', {'fack':is_fake})
+
+def fackNews(request):
+	is_fake = None
+	if request.method == 'POST':
+		message = request.POST['user_input']
+		model = Model(message)
+		is_fake = model.predict()[0]
+		print(is_fake)
+	return render(request, 'news.html')

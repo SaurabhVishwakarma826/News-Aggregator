@@ -23,26 +23,14 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="static/css/stylee.css" rel="stylesheet">
+
+    
+
 </head>
 
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-
-        <!-- <div class="row align-items-center bg-light px-lg-5">
-            <div class="col-12 col-md-8">
-                <div class="d-flex justify-content-between">
-                    <div class="bg-primary text-white text-center py-2" style="width: 100px;">Tranding</div>
-                    <div class="owl-carousel owl-carousel-1 tranding-carousel position-relative d-inline-flex align-items-center ml-3" style="width: calc(100% - 100px); padding-left: 90px;">
-                        <div class="text-truncate"><a class="text-secondary" href="">Labore sit justo amet eos sed, et sanctus dolor diam eos</a></div>
-                        <div class="text-truncate"><a class="text-secondary" href="">Gubergren elitr amet eirmod et lorem diam elitr, ut est erat Gubergren elitr amet eirmod et lorem diam elitr, ut est erat</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 text-right d-none d-md-block">
-                Monday, January 01, 2045
-            </div>
-        </div> -->
 
         <div class="row align-items-center py-2 px-lg-5">
             <div class="col-lg-4">
@@ -71,7 +59,7 @@
                 <div class="navbar-nav mr-auto py-0">
                     <a href="/" class="nav-item nav-link">Home</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Categories</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="/sports" class="dropdown-item">Sports</a>
                             <a href="/politics" class="dropdown-item">Politics</a>
@@ -89,7 +77,7 @@
                             <a href="/news" class="dropdown-item">Fack News Detector</a>
                         </div>
                     </div>
-                    <a href="/contact" class="nav-item nav-link active">Contact</a>
+                    <a href="/contact" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
                     <input type="text" class="form-control" placeholder="Keyword">
@@ -104,134 +92,34 @@
     <!-- Navbar End -->
 
 
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="container">
-            <nav class="breadcrumb bg-transparent m-0 p-0">
-                <a class="breadcrumb-item" href="/">Home</a>
-                <span class="breadcrumb-item active">Contact</span>
-            </nav>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
 
 
-    <!-- Contact Start -->
-    <div class="container-fluid py-3">
-        <div class="container">
-            <div class="bg-light py-2 px-4 mb-3">
-                <h3 class="m-0">Contact Us For Any Queries</h3>
-            </div>
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="bg-light mb-3" style="padding: 30px;">
-                        <h6 class="font-weight-bold">Get in touch</h6>
-                        <p>Here are contact details, if you have any query you can reach us.</p>
-                        <div class="d-flex align-items-center mb-3">
-                            {% comment %} <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i> {% endcomment %}
-
-                            <!-- lord icon add -->
-                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-                            <i class="mr-1">
-                                <lord-icon
-                                src="https://cdn.lordicon.com/oaflahpk.json"
-                                trigger="hover"
-                                colors="primary:#ED1C24"
-                                state="hover-jump-spin"
-                                style="width:50px;height:50px;">
-                                </lord-icon>
-                            </i>
-
-
-                            <div class="d-flex flex-column">
-                                <h6 class="font-weight-bold">Our Office</h6>
-                                <p class="m-0">Santosh bhuvan, Nallasopara(East)</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3">
-                            {% comment %} <i class="fa fa-2x fa-envelope-open text-primary mr-1"  style="padding:8px ;width: 50px"></i> {% endcomment %}
-                            <i class="mr-1">
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/pdpnqfoe.json"
-                                    trigger="hover"
-                                    colors="primary:#ED1C24"
-                                    style="width:50px;height:50px">
-                                </lord-icon>
-                            </i>
+    <form method="post">
+        {% csrf_token %}
+        <label for="user_input">Enter your SMS:</label>
+        <textarea id="user_input" name="user_input"></textarea>
+        <br>
+        <button type="submit">Detect</button>
+    </form>
+    
+        {% if fack == 1 %}
+            <p>The SMS you entered is likely to be fake.</p>
+        {% else %}
+            <p>The SMS you entered is likely to be genuine.</p>
+        {% endif %}
+    
 
 
 
-
-                            <div class="d-flex flex-column">
-                                <h6 class="font-weight-bold">Email Us</h6>
-                                <p class="m-0">newsAggregator@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            {% comment %} <i class="fas fa-2x fa-phone-alt text-primary "  style="padding:8px ;width: 50px"></i> {% endcomment %}
-
-                            <i class="mr-2">
-                                <lord-icon
-                                    src= "https://cdn.lordicon.com/tftaqjwp.json"
-                                    trigger="hover"
-                                    colors="primary:#ED1C24"
-                                    state="hover-phone-ring"
-                                    style="width:43px;height:43px;">
-                                </lord-icon>
-                            </i>
-
-                            <div class="d-flex flex-column">
-                                <h6 class="font-weight-bold">Call Us</h6>
-                                <p class="m-0">+91 9876543219</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="contact-form bg-light mb-3" style="padding: 30px;">
-                        <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <div class="control-group">
-                                        <input type="text" class="form-control p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                        <p class="help-block text-danger"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="control-group">
-                                        <input type="email" class="form-control p-4" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                        <p class="help-block text-danger"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control p-4" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <textarea class="form-control" rows="4" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;" type="submit" id="sendMessageButton">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Contact End -->
-
+    
     <!-- Footer Start -->
     <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
         <div class="row">
             <div class="col-lg-3 col-md-6 mb-5">
                 <a href="index.html" class="navbar-brand">
-                    <h1 class="mb-2 mt-n2 display-5 text-uppercase"><span class="text-primary">News</span>Room</h1>
+                    <h1 class="mb-2 mt-n2 display-5 text-uppercase"><span class="text-primary">News</span>Aggr.</h1>
                 </a>
-                <p>Online news is not about the death of newspapers, but rather the birth of a new era in journalism.</p>
+                <p>Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem lorem sit sed elitr sed kasd et</p>
                 <div class="d-flex justify-content-start mt-4">
                     <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -243,10 +131,10 @@
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="font-weight-bold mb-4">Categories</h4>
                 <div class="d-flex flex-wrap m-n1">
-                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
+                    <a href="/politics" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
+                    <a href="/business" class="btn btn-sm btn-outline-secondary m-1">Business</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                    <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
+                    <a href="/sports" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
                     <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
@@ -281,14 +169,14 @@
                     <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Advertise</a>
                     <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Privacy & policy</a>
                     <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Terms & conditions</a>
-                    <a class="text-secondary" href="/"><i class="fa fa-angle-right text-dark mr-2"></i>Contact</a>
+                    <a class="text-secondary" href="/contact"><i class="fa fa-angle-right text-dark mr-2"></i>Contact</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid py-4 px-sm-3 px-md-5">
         <p class="m-0 text-center">
-            &copy; <a class="font-weight-bold" href="#">NEWSAGGREGATOR</a>. All Rights Reserved. 
+            &copy; <a class="font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. 
 			
 			<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 			Designed by <a class="font-weight-bold" href="#">Aditya Nishad</a>
