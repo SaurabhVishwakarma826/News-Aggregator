@@ -93,22 +93,45 @@
 
 
 
-    <form method="post">
+    {% comment %} <form method="post">
         {% csrf_token %}
         <label for="user_input">Enter your SMS:</label>
         <textarea id="user_input" name="user_input"></textarea>
         <br>
         <button type="submit">Detect</button>
     </form>
-    
         {% if fack == 0 %}
             <p>The SMS you entered is likely to be fake.</p>
         {% else %}
             <p>The SMS you entered is likely to be genuine.</p>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
-
-
+        <form method="post">
+            {% csrf_token %}
+            <label for="user_input">Enter your News:</label>
+            <textarea id="user_input" name="user_input">{{ request.POST.user_input }}</textarea>
+            <br>
+            <button type="submit">Detect</button>
+            <button type="button" onclick="clearForm()">Clear</button>
+        </form>
+        <p id="result">
+            {% if fack == 'NULL' %}
+                Please enter your News first
+            {% elif fack == 0 %}
+                The News you entered is likely to be fake.
+            {% else %}
+                The News you entered is likely to be genuine.
+            {% endif %}
+        </p>
+        <script>
+            function clearForm() {
+                document.getElementById("user_input").value = "";
+                document.getElementById("result").innerHTML = "";
+                {% if fack == 1 or fack == 0 %}
+                   fack = 'NULL'
+                {% endif %}
+            }
+        </script> 
     
     <!-- Footer Start -->
     <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">

@@ -7,6 +7,7 @@ from joblib import dump, load
 import joblib
 from manage import process
 from newsModelCode.predict import Model
+import pandas as pd
 
 
 def index(request):
@@ -93,34 +94,40 @@ def fackSMS(request):
     clf.fit(X_train, y_train)
     clf.score(X_test, y_test)
 
-    is_fake = None
-    if request.method == 'POST':
-        # Get the user input from the form
+    is_fake = ''
+    if request.method == 'POST' and 'user_input' in request.POST:
         message = request.POST['user_input']
-        data = [message]
-        vect = cv.transform(data).toarray()
-        # Use the ML model to predict whether the input is fake or not
-        is_fake = clf.predict(vect)
-        print(is_fake)
-        is_fake=is_fake[0]
+        if not message.strip():
+            is_fake = 'NULL'
+        else:
+            data = [message]
+            vect = cv.transform(data).toarray()
+            is_fake = clf.predict(vect)
+            print(is_fake)
+            is_fake=is_fake[0]
     return render(request, 'sms.html', {'fack':is_fake})
-
-
+	
 def fackMail(request):
 	model = joblib.load('./Mails_model/spam_classifier.joblib')
-	is_fake = None
-	if request.method == 'POST':
-		message = request.POST['user_input']
-		message = [message]
-		is_fake = model.predict(message)[0]
-		print(is_fake)
+	is_fake = ''
+	if request.method == 'POST' and 'user_input' in request.POST:
+		message=request.POST['user_input']
+		if not message.strip():
+			is_fake = 'NULL'
+		else:
+			message = [message]
+			is_fake = model.predict(message)[0]
+			print(is_fake)
 	return render(request, 'mails.html', {'fack':is_fake})
 
 def fackNews(request):
-	is_fake = None
-	if request.method == 'POST':
-		message = request.POST['user_input']
-		model = Model(message)
-		is_fake = model.predict()[0]
-		print(is_fake)
-	return render(request, 'news.html')
+    is_fake = ''
+    if request.method == 'POST' and 'user_input' in request.POST:
+        message = request.POST['user_input']
+        if not message.strip():
+            is_fake = 'NULL'
+        else:
+            model = Model(message)
+            is_fake = model.predict()[0]
+            print(is_fake)
+    return render(request, 'news.html', {'fack':is_fake})

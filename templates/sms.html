@@ -97,17 +97,29 @@
     <form method="post">
         {% csrf_token %}
         <label for="user_input">Enter your SMS:</label>
-        <textarea id="user_input" name="user_input"></textarea>
+        <textarea id="user_input" name="user_input">{{ request.POST.user_input }}</textarea>
         <br>
         <button type="submit">Detect</button>
+        <button type="button" onclick="clearForm()">Clear</button>
     </form>
-    
-        {% if fack == 1 %}
-            <p>The SMS you entered is likely to be fake.</p>
+    <p id="result">
+        {% if fack == 'NULL' %}
+            Please enter your SMS first
+        {% elif fack == 1 %}
+            The SMS you entered is likely to be fake.
         {% else %}
-            <p>The SMS you entered is likely to be genuine.</p>
+            The SMS you entered is likely to be genuine.
         {% endif %}
-    
+    </p>
+    <script>
+        function clearForm() {
+            document.getElementById("user_input").value = "";
+            document.getElementById("result").innerHTML = "";
+            {% if fack == 1 or fack == 0 %}
+               fack = 'NULL'
+            {% endif %}
+        }
+    </script> 
 
 
 
