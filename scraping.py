@@ -1,6 +1,3 @@
-
-
-
 import requests
 from home.models import HomeNews, SportsNews, BusinessNews, WorldNews, PoliticsNews
 from newsModelCode.predict import Model
