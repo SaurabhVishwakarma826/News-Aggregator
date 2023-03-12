@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import HomeNews, SportsNews, BusinessNews, WorldNews, PoliticsNews
+from home.models import HomeNews, SportsNews, BusinessNews, WorldNews, PoliticsNews, Contact
 import scraping
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -8,7 +8,7 @@ import joblib
 from manage import process
 from newsModelCode.predict import Model
 import pandas as pd
-
+from django.shortcuts import redirect
 
 def index(request):
 	scraping.home()
@@ -25,7 +25,7 @@ def index(request):
 	home_6 = HomeNews.objects.all().order_by('?')[4:10]      # trending news
 
 	context = {
-		'home_list':home_headline,
+		'home_list': home_headline,
 		'politics_list': politics_headline,
 		'world_list' : world_headline,
 		'business_list' : business_headline,
@@ -71,8 +71,18 @@ def businessnews(request):
 		}
 	return render(request, 'business.html', context)
 
+
 def contact(request):
-	return render(request, 'contact.html')
+    message = ''
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message_text = request.POST['message']
+        contact = Contact(name=name, email=email, subject=subject, message=message_text)
+        contact.save()
+        message = ' Thanks, for connecting with us!'
+    return render(request, 'contact.html', {'message': message})
 
 
 def fackSMS(request):
@@ -131,3 +141,4 @@ def fackNews(request):
             is_fake = model.predict()[0]
             print(is_fake)
     return render(request, 'news.html', {'fack':is_fake})
+

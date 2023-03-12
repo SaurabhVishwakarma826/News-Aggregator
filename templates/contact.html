@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+                {% comment %} <div class="col-md-7">
                     <div class="contact-form bg-light mb-3" style="padding: 30px;">
                         <div id="success"></div>
                         <form name="sentMessage" id="contactForm" novalidate="novalidate">
@@ -218,7 +218,50 @@
                             </div>
                         </form>
                     </div>
+                </div> {% endcomment %}
+                <div class="col-md-7">
+                    <div class="contact-form bg-light mb-3" style="padding: 30px;">
+                        <form name="sentMessage" id="contactForm" method="post" action="{% url 'contact' %}">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="control-group">
+                                        <input type="text" class="form-control p-4" id="name" name="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="control-group">
+                                        <input type="email" class="form-control p-4" id="email" name="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control p-4" id="subject" name="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control" rows="4" id="message" name="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;" type="submit" id="sendMessageButton">Send Message</button>
+                            </div>
+                        </form>
+                        {% if message %}
+                        <div class="successs" style="color: #1134fa;">
+                            <b>Success!</b>{{ message }}
+                        </div>
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.successs').style.display = 'none';
+                            }, 3000);
+                        </script>
+                    {% endif %}
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -308,8 +351,8 @@
     <script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="static/mail/jqBootstrapValidation.min.js"></script>
-    <script src="static/mail/contact.js"></script>
+    {% comment %} <script src="static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="static/mail/contact.js"></script> {% endcomment %}
 
     <!-- Template Javascript -->
     <script src="static/js/main.js"></script>
