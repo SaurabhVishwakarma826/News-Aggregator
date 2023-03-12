@@ -1,0 +1,220 @@
+
+*{
+    box-sizing: border-box;
+}
+
+.support-container{
+    /* border: 1px solid red; */
+    margin: auto;
+    width: 55%;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 15px 10px 30px 0px rgba(0, 0, 0, 0.6);
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.support-container h1{
+    font-size: 27px;
+}
+
+.support-container textarea{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 12px 0;
+    display: inline-block;
+    border: none;
+    background: whitesmoke;
+}
+
+.support-container textarea:focus{
+    background-color: #ddd;
+    outline: none;
+}
+
+.box_btn{
+    
+    display: flex;
+}
+
+.support-container .btn{
+    border: none;
+    background-color: rgb(187, 191, 188);
+    color: #000;
+    padding: 12px;
+    cursor: pointer;
+    width: 25%;
+    margin: auto;
+    transition: ease 0.4s;
+    margin-left: 180px;
+
+}
+
+.support-container .btn-2{
+    border: none;
+    background-color: rgb(187, 191, 188);
+    color: #000;
+    padding: 12px;
+    cursor: pointer;
+    width: 25%;
+    margin: auto;
+    transition: ease 0.4s;
+    margin-right: 180px;
+    outline: none;
+}
+
+.support-container .btn:hover,
+.support-container .btn-2:hover{
+
+    /* border: 1px solid #ED1C24; */
+    background-color: rgb(197, 190, 190);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+}
+
+.selection{
+    /* border: 1px solid black; */
+    margin-top: 15px;
+}
+
+.selection p{
+  
+    padding: 10px;
+    text-align: center;
+}
+.selection .fake{
+   
+    background-color: #ED1C24;
+    color: #fff;
+}
+
+.selection .genuine{
+    
+    background-color: #068d0f;
+    color: #fff;
+}
+
+
+
+
+
+
+@media (max-width: 992px) {
+    .support-container {
+        width: 70%;
+        padding: 14px;
+        box-shadow: 10px 8px 30px 0px rgba(0, 0, 0, 0.6);
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+
+
+    .support-container textarea {
+        
+        padding: 12px;
+        margin: 5px 0 -10px 0;
+
+    }
+
+    .support-container .btn {
+       
+        padding: 10px;
+        width: 20%;
+        margin-left: 170px;
+
+    }
+
+    .support-container .btn-2 {
+    
+        padding: 10px;
+        width: 20%;
+        margin-right: 170px;
+    }
+}
+
+
+@media (max-width: 821px) {
+    .support-container .btn {
+       
+        padding: 10px;
+        width: 20%;
+        margin-left: 150px;
+
+    }
+
+    .support-container .btn-2 {
+    
+        padding: 10px;
+        width: 20%;
+        margin-right: 150px;
+    }
+
+    
+}
+
+
+@media (max-width: 477px) {
+
+    .support-container {
+        
+        width: 85%;
+        padding: 14px;
+        box-shadow: none;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .support-container h1 {
+        font-size: 22px;
+    }
+
+    .support-container label{
+        font-size: 15px;
+    }
+
+    .support-container textarea {
+        font-size: 15px;
+        width: 100%;
+        padding: 13px;
+        margin: 3px 0 -10px 0;
+
+    }
+
+    .box_btn {
+        display: block;
+       
+    }
+
+    .support-container .btn {
+        font-size: 14px;
+        display: block;
+        padding: 5px 3px;
+        width: 100%;
+        margin-left: 0px;
+        margin-bottom: 5px;
+        margin-top: -7px;
+    }
+    .support-container .btn:hover,
+    .support-container .btn-2:hover{
+    
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .support-container .btn-2 {
+        font-size: 14px;
+        display: block;
+        padding: 5px 3px;
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 5px;
+    
+    }
+
+    .selection{
+        margin-top: 10px;
+    }
+
+    .selection p{
+        padding: 5px;
+        font-size: 14px;
+    }
+    
+}

@@ -23,6 +23,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="static/css/stylee.css" rel="stylesheet">
+    <link href="static/css/support_style.css" rel="stylesheet">
+
 
     
 
@@ -59,7 +61,7 @@
                 <div class="navbar-nav mr-auto py-0">
                     <a href="/" class="nav-item nav-link">Home</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Categories</a>
+                        <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">Categories</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="/sports" class="dropdown-item">Sports</a>
                             <a href="/politics" class="dropdown-item">Politics</a>
@@ -70,11 +72,11 @@
                     </div>
                     
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Support</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Support</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="/sms" class="dropdown-item">Fack SMS Detector</a>
-                            <a href="/mails" class="dropdown-item">Fack Mails Detector</a>
-                            <a href="/news" class="dropdown-item">Fack News Detector</a>
+                            <a href="/sms" class="dropdown-item">SMS Detector</a>
+                            <a href="/mails" class="dropdown-item">Mails Detector</a>
+                            <a href="/news" class="dropdown-item">News Detector</a>
                         </div>
                     </div>
                     <a href="/contact" class="nav-item nav-link">Contact</a>
@@ -92,25 +94,34 @@
     <!-- Navbar End -->
 
 
+    <!--SMS Detection Start-->
 
 
-    <form method="post">
-        {% csrf_token %}
-        <label for="user_input">Enter your SMS:</label>
-        <textarea id="user_input" name="user_input">{{ request.POST.user_input }}</textarea>
-        <br>
-        <button type="submit">Detect</button>
-        <button type="button" onclick="clearForm()">Clear</button>
-    </form>
-    <p id="result">
-        {% if fack == 'NULL' %}
-            Please enter your SMS first
-        {% elif fack == 1 %}
-            The SMS you entered is likely to be fake.
-        {% else %}
-            The SMS you entered is likely to be genuine.
-        {% endif %}
-    </p>
+    <div class="support-container">
+        <form method="post">
+            {% csrf_token %}
+            <h1>Spam SMS Detector</h1>
+            <hr/>
+
+            <label for="user_input"><b>Enter your SMS:</b></label>
+            <textarea rows="4" placeholder="Enter Your Mail" name="user_input" id="user_input" required>{{request.POST.user_input}}</textarea>
+            <hr/>
+
+            <div class="box_btn">
+                <button class="btn" type="submit">Detect</button>
+                <button class="btn-2" type="button" onclick="clearForm()">Clear</button>
+            </div>
+        </form>
+        <div class="selection" id="result">
+            {% if fack == 1 %} 
+                <p class = "fake">The Mail you entered is likely to be fake.</p>
+            {% else %} 
+                <p class = "genuine">The Mail you entered is likely to be genuine.</p>
+            {% endif %}
+
+        </div>
+    </div>
+
     <script>
         function clearForm() {
             document.getElementById("user_input").value = "";
@@ -120,6 +131,9 @@
             {% endif %}
         }
     </script> 
+    
+    <!--SMS Detection End-->
+
 
 
 
