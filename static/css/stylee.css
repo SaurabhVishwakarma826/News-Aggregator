@@ -35,7 +35,11 @@
 *::after {
   box-sizing: border-box;
 }
+/* edited start */
 
+
+
+/* edited end */
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -9571,36 +9575,50 @@ h6,
 /* ----edited css  start-------- */
 
 .Featured_Slider{
-  /* border: 1px solid red; */
+
   font-size: 16px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  height: 50px;
 }
 
-/* .Category_Slider{
-  border: 2px solid red;
-  height: 100px;
-} */
+/* index fetured start */
 
-/* ---edited css end---- */
+.Featured_Sliders{
+  /* border: 1px solid pink; */
+  font-size: 16px;
+  height: 66px;
+}
 
-/* edited */
 
+.Category_box_container img{
+  /* border: 1px solid pink; */
+  height: 180px;
+  width: 200px;
+  /* height: 400px; */
+}
+
+
+
+/* index fetured end */
+
+
+/* category box start */
 .box-container{
-  /* border: 1px solid red; */
-  min-width: 340px;
   width: 340px;
-  margin-right: 0px;
-
+  transition: 0.5s;
+}
+.box-container:hover{
+  box-shadow:  0 0 25px 0px rgba(0,0,0,0.2);
 }
 
 .box-container img{
-  /* border: 1px solid red; */
-  height: 240px;
+  /* border: 1px solid green; */
+  height: 200px;
   width: 340px;
 }
 
 .whole-container{
-
+  /* border: 1px solid black; */
   width: 100%;
   height: auto;
   padding-right: 15px;
@@ -9615,6 +9633,14 @@ h6,
 .underline:hover{
   text-decoration: none;
 }
+/* category box end */
+
+
+/* footer logo size strat */
+.news_font{
+  font-size: 27px;
+}
+/* footer logo size end */
 
 
 
@@ -9700,3 +9726,5 @@ h6,
   padding: 0;
   list-style-type: none;
 }
+
+

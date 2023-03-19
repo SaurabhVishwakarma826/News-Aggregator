@@ -221,13 +221,13 @@
                 <h3 class="m-0">Featured</h3>
                 <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
             </div>
-            <div class="owl-carousel owl-carousel-2 carousel-item-4 position-relative">
+            <div class="owl-carousel owl-carousel-2 carousel-item-4 position-relative">  
               {% for object in home_list%}
                 <div class="position-relative overflow-hidden" style="height: 300px;">
                     <img class="img-fluid w-100 h-100" src="{{ object.home_image }}" style="object-fit: cover;">
                     <div class="overlay">
                         
-                        <a class="h4 m-0 text-white Featured_Slider" href="{{object.home_url}}">{{object.home_title}}</a>
+                        <a class="h4 m-0 text-white Featured_Sliders" href="{{object.home_url}}">{{object.home_title}}</a>
 
                     </div>
                 </div>
@@ -247,13 +247,13 @@
                     <div class="bg-light py-2 px-4 mb-3">
                         <a href="/politics" class="underline"><h3 class="m-0">Politics</h3></a>
                     </div>
-                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative Category_container">
                       {%for object in politics_list%}
-                        <div class="position-relative Category_Slider">
+                        <div class="position-relative Category_box_container">
                             <img class="img-fluid w-100" src="{{ object.politics_image }}" style="object-fit: cover;">
                             <div class="overlay position-relative bg-light">
                         
-                                <a class="h4 m-0 Featured_Slider" href="{{object.politics_url}}">{{object.politics_title}}</a>
+                                <a class="h4 m-0 Featured_Sliders" href="{{object.politics_url}}">{{object.politics_title}}</a>
                             </div>
                         </div>
                       {%endfor%}
@@ -264,13 +264,13 @@
                     <div class="bg-light py-2 px-4 mb-3">
                         <a href="/world" class="underline"><h3 class="m-0">Global</h3></a>
                     </div>
-                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative Category_container">
                       {%for object in world_list%}
-                        <div class="position-relative">
+                        <div class="position-relative Category_box_container">
                             <img class="img-fluid w-100" src="{{ object.world_image }}" style="object-fit: cover;">
                             <div class="overlay position-relative bg-light">
                                 
-                                <a class="h4 m-0 Featured_Slider" href="{{object.world_url}}">{{object.world_title}}</a>
+                                <a class="h4 m-0 Featured_Sliders" href="{{object.world_url}}">{{object.world_title}}</a>
                             </div>
                         </div>
                       {%endfor%}
@@ -292,13 +292,13 @@
                     <div class="bg-light py-2 px-4 mb-3">
                         <a href="/business" class="underline"><h3 class="m-0">Business</h3></a>
                     </div>
-                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative Category_container">
                       {%for object in business_list%}
-                        <div class="position-relative">
+                        <div class="position-relative Category_box_container">
                             <img class="img-fluid w-100" src="{{object.business_image}}" style="object-fit: cover;">
                             <div class="overlay position-relative bg-light">
                                
-                                <a class="h4 m-0 Featured_Slider" href="{{object.business_url}}">{{object.business_title}}</a>
+                                <a class="h4 m-0 Featured_Sliders" href="{{object.business_url}}">{{object.business_title}}</a>
                             </div>
                         </div>
                       {%endfor%}
@@ -309,13 +309,13 @@
                     <div class="bg-light py-2 px-4 mb-3">
                         <a href="/sports" class="underline"><h3 class="m-0">Sports</h3></a>
                     </div>
-                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                    <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative Category_container">
                       {%for object in sport_list%}
-                        <div class="position-relative">
+                        <div class="position-relative Category_box_container">
                             <img class="img-fluid w-100" src="{{object.sports_image}}" style="object-fit: cover;">
                             <div class="overlay position-relative bg-light">
                               
-                                <a class="h4 m-0 Featured_Slider" href="{{object.sports_url}}">{{object.sports_title}}</a>
+                                <a class="h4 m-0 Featured_Sliders" href="{{object.sports_url}}">{{object.sports_title}}</a>
                             </div>
                         </div>
                       {%endfor%}
@@ -346,7 +346,7 @@
                               <img class="img-fluid w-100" src="{{object.home_image}}" style="object-fit: cover;">
                               <div class="overlay position-relative bg-light" >
                                   
-                                <a class="h4 Featured_Slider" style="margin-bottom: -5px;" href="{{object.home_url}}">{{object.home_title}}</a>
+                                <a class="h4 Featured_Sliders" style="margin-bottom: -5px;" href="{{object.home_url}}">{{object.home_title}}</a>
                                   
                               </div>
                             </div>
@@ -360,7 +360,7 @@
                                 <img class="img-fluid w-100" src="{{object.home_image}}" style="object-fit: cover;">
                                 <div class="overlay position-relative bg-light">
                                 
-                                    <a class="h4 Featured_Slider" style="margin-bottom: -4px;" href="{{object.home_url}}">{{object.home_title}}</a>
+                                    <a class="h4 Featured_Sliders" style="margin-bottom: -4px;" href="{{object.home_url}}">{{object.home_title}}</a>
                                     
                                 </div>
                             </div>
@@ -472,7 +472,7 @@
 
                     <!-- Ads Start -->
                     <div class="mb-3 pb-3">
-                        <a href=""><img class="img-fluid" src="static/img/news-500x280-4.jpg" alt=""></a>
+                        <a href=""><img class="img-fluid" src="https://source.unsplash.com/500x250/?qoute Citations Sayings" alt=""></a>
                     </div>
                     <!-- Ads End -->
 
@@ -506,14 +506,14 @@
     <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
         <div class="row">
             <div class="col-lg-3 col-md-6 mb-5">
-                <a href="#" class="navbar-brand">
-                    <h1 class="mb-2 mt-n2 display-5 text-uppercase"><span class="text-primary">News</span>Aggr.</h1>
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="mb-2 mt-n2 display-5 text-uppercase news_font"><span class="text-primary">News</span>Aggregator</h1>
                 </a>
-                <p>We bring multiple news stories from multiple trusted sources in a single platform.</p>
+                <p>Online news is not about the death of newspapers, but rather the birth of a new era in journalism.</p>
                 <div class="d-flex justify-content-start mt-4">
                     <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://www.linkedin.com/in/saurabh-vishwakarma-9458b2219/"><i class="fab fa-linkedin-in"></i></a>
                     <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-instagram"></i></a>
                     <a class="btn btn-outline-secondary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-youtube"></i></a>
                 </div>
@@ -566,7 +566,7 @@
     </div>
     <div class="container-fluid py-4 px-sm-3 px-md-5">
         <p class="m-0 text-center">
-            &copy; <a class="font-weight-bold" href="#">newsAggregator.com</a>. All Rights Reserved. 
+            &copy; <a class="font-weight-bold" href="#">NEWSAGGREGATOR</a>. All Rights Reserved. 
 
 			Designed by <a class="font-weight-bold" href="#">Saurabh, Aditya, Ajay & Abhishek</a>
         </p>
