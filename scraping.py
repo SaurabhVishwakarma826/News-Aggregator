@@ -39,7 +39,7 @@ def home():
                 new_home.home_image = image_src
                 new_home.save()
     except Exception as e:
-        print(e)
+        print('Erro in home',e)
 
 def politics():
     try:
@@ -93,7 +93,7 @@ def politics():
                 new_politics.politics_url = link
                 new_politics.save()
     except Exception as e:
-        print(e)
+        print('Error in politics',e)
 
 def world():
     try:
@@ -148,22 +148,40 @@ def world():
                 new_world.world_url = link
                 new_world.save()
     except Exception as e:
-        print(e)
+        print('Error in World',e)
 
 def sport():
     try:
         SportsNews.objects.all().delete()
         session = requests.Session()
         session.headers = {"User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)"}
-        url = "https://zeenews.india.com/cricket/t20-world-cup"
-        content = session.get(url, verify=False).content
+        # url = "https://zeenews.india.com/cricket/t20-world-cup"
+        # content = session.get(url, verify=False).content
+        # soup = BSoup(content, "html.parser")
+        # News = soup.find_all('div', {"class": "news_item"})
+        # for artcile in News:
+        #     link = artcile.find('div', {"class": "news_left"}).find('div', {"class": "news_title"}).find('a')['href']
+        #     link = 'https://zeenews.india.com' + link
+        #     image_src = artcile.find('div', {"class": "news_right"}).find('img')['src']
+        #     title = artcile.find('div', {"class": "news_left"}).find('div', {"class": "news_title"}).text
+        #     new_sport = SportsNews()
+        #     model = Model(title)
+        #     if model.predict()[0] == 1:
+        #         new_sport.sports_title = title
+        #         new_sport.sports_url = link
+        #         new_sport.sports_image = image_src
+        #         new_sport.save()
+        url = "https://sports.ndtv.com/ipl-2023/news"
+        content = requests.get(url).content
         soup = BSoup(content, "html.parser")
-        News = soup.find_all('div', {"class": "news_item"})
-        for artcile in News:
-            link = artcile.find('div', {"class": "news_left"}).find('div', {"class": "news_title"}).find('a')['href']
-            link = 'https://zeenews.india.com' + link
-            image_src = artcile.find('div', {"class": "news_right"}).find('img')['src']
-            title = artcile.find('div', {"class": "news_left"}).find('div', {"class": "news_title"}).text
+        News = soup.find('div',{'class':'lst-pg_hd'})
+        ul = News.find('ul',{'id':'container_listing'})
+        li = ul.find_all('li',{'class':'lst-pg-a-li'})
+        for article in li:
+            title = article.find('a',{'class':'lst-pg_ttl'}).text
+            link = article.find('a',{'class':'lst-pg_ttl'})['href']
+            link = 'https://sports.ndtv.com' + link
+            image_src = article.find('div',{'class':'img-gr'}).find('img')['data-src']
             new_sport = SportsNews()
             model = Model(title)
             if model.predict()[0] == 1:
@@ -202,7 +220,7 @@ def sport():
                 new_sport.sports_image = image_src
                 new_sport.save()
     except Exception as e:
-        print(e)
+        print('Error in Sports',e)
 
 def business():
     try:
@@ -259,5 +277,5 @@ def business():
                 new_business.business_url = link
                 new_business.save()
     except Exception as e:
-        print(e)
+        print('Error in business',e)
 

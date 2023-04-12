@@ -18,11 +18,11 @@ def index(request):
 	sport_headline = SportsNews.objects.all().order_by('?')[:4]
 	business_headline = BusinessNews.objects.all().order_by('?')[:4]
 
-	home_2 = HomeNews.objects.all().order_by('?')[6:8]       # popular news
-	home_3 = HomeNews.objects.all().order_by('?')[8:10]      # populer news
-	home_4 = HomeNews.objects.all().order_by('?')[10:15]     # latest news
-	home_5 = WorldNews.objects.all().order_by('?')[4:9]      # latest news
-	home_6 = HomeNews.objects.all().order_by('?')[4:10]      # trending news
+	home_2 = HomeNews.objects.all().order_by('?')[:2]       # popular news
+	home_3 = HomeNews.objects.all().order_by('?')[:2]      # populer news
+	home_4 = HomeNews.objects.all().order_by('?')[:5]     # latest news
+	home_5 = WorldNews.objects.all().order_by('?')[:5]      # latest news
+	home_6 = HomeNews.objects.all().order_by('?')[:6]      # trending news
 
 	context = {
 		'home_list': home_headline,

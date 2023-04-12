@@ -126,7 +126,6 @@
             {% else %} 
                 <p class = "genuine">The Mail you entered is likely to be genuine.</p>
             {% endif %}
-
         </div>
     </div>
 
@@ -237,3 +236,42 @@
 </body>
 
 </html>
+
+
+{% comment %}
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/News-Aggregator
+ExecStart=/home/ubuntu/News-Aggregator/env/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          NewsAggregator.wsgi:application
+
+[Install]
+WantedBy=multi-user.target 
+{% endcomment %}
+
+
+{% comment %} 
+server {
+    listen 80;
+    server_name 44.204.135.0;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/sammy/myprojectdir;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+ {% endcomment %}
