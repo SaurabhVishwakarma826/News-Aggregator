@@ -120,17 +120,16 @@
             <hr/>
 
             <div class="box_btn">
-                <button class="btn" type="submit">Detect</button>
+                <button class="btn" type="submit",>Detect</button>
                 <button class="btn-2" type="button" onclick="clearForm()">Clear</button>
             </div>
         </form>
         <div class="selection" id="result">
-            {% if fack == 1 %} 
-                <p class = "fake">The SMS you entered is likely to be fake.</p>
-            {% else %} 
-                <p class = "genuine">The SMS you entered is likely to be genuine.</p>
-            {% endif %}
-
+                {% if fack == 1 %} 
+                    <p class = "fake">The SMS you entered is likely to be fake.</p>
+                {% elif fack == 0 %} 
+                    <p class = "genuine">The SMS you entered is likely to be genuine.</p>
+                {% endif %}
         </div>
     </div>
 
@@ -142,6 +141,9 @@
                fack = 'NULL'
             {% endif %}
         }
+        {% comment %} function displayBlock() {
+            document.getElementById("result").style.display = "block";
+        } {% endcomment %}
     </script> 
     
     <!--SMS Detection End-->

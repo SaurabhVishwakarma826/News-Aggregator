@@ -123,7 +123,7 @@
         <div class="selection" id="result">
             {% if fack == 0 %} 
                 <p class = "fake">The Mail you entered is likely to be fake.</p>
-            {% else %} 
+            {% elif fack == 1 %} 
                 <p class = "genuine">The Mail you entered is likely to be genuine.</p>
             {% endif %}
         </div>
